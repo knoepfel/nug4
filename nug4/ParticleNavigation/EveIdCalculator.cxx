@@ -6,9 +6,9 @@
 /// \author  seligman@nevis.columbia.edu
 ////////////////////////////////////////////////////////////////////////
 
-#include "nutools/ParticleNavigation/EveIdCalculator.h"
-#include "nutools/ParticleNavigation/ParticleList.h"
-#include "nutools/ParticleNavigation/ParticleHistory.h"
+#include "nug4/ParticleNavigation/EveIdCalculator.h"
+#include "nug4/ParticleNavigation/ParticleList.h"
+#include "nug4/ParticleNavigation/ParticleHistory.h"
 #include "nusimdata/SimulationBase/MCParticle.h"
 
 namespace sim {

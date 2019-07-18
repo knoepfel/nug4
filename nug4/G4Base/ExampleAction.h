@@ -12,7 +12,7 @@
 #ifndef ALTNS_EXAMPLEACTION_H
 #define ALTNS_EXAMPLEACTION_H
 
-#include "nutools/G4Base/UserAction.h"
+#include "nug4/G4Base/UserAction.h"
 
 // Forward declarations.
 class G4Event;

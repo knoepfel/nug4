@@ -6,9 +6,9 @@
 /// \author  seligman@nevis.columbia.edu
 ////////////////////////////////////////////////////////////////////////
 
-#include "nutools/ParticleNavigation/EmEveIdCalculator.h"
-#include "nutools/ParticleNavigation/ParticleList.h"
-#include "nutools/ParticleNavigation/ParticleHistory.h"
+#include "nug4/ParticleNavigation/EmEveIdCalculator.h"
+#include "nug4/ParticleNavigation/ParticleList.h"
+#include "nug4/ParticleNavigation/ParticleHistory.h"
 
 #include <TString.h>
 

@@ -6,8 +6,8 @@
 /// \author  seligman@nevis.columbia.edu, brebel@fnal.gov
 ////////////////////////////////////////////////////////////////////////
 
-#include "nutools/G4Base/ConvertMCTruthToG4.h"
-#include "nutools/G4Base/PrimaryParticleInformation.h"
+#include "nug4/G4Base/ConvertMCTruthToG4.h"
+#include "nug4/G4Base/PrimaryParticleInformation.h"
 #include "nusimdata/SimulationBase/MCTruth.h"
 #include "nusimdata/SimulationBase/MCParticle.h"
 

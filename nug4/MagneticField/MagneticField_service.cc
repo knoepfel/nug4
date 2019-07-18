@@ -22,8 +22,8 @@
 // Framework includes
 #include "messagefacility/MessageLogger/MessageLogger.h"
 
-// nutools includes
-#include "nutools/MagneticField/MagneticField.h"
+// nug4 includes
+#include "nug4/MagneticField/MagneticField.h"
 
 #include "TGeoManager.h"
 
