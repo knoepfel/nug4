@@ -10,8 +10,8 @@
 /// units, the standard for LArSoft is that distances are in cm, and
 /// energies are in GeV.
 
-#include "nutools/ParticleNavigation/ParticleList.h"
-#include "nutools/ParticleNavigation/EveIdCalculator.h"
+#include "nug4/ParticleNavigation/ParticleList.h"
+#include "nug4/ParticleNavigation/EveIdCalculator.h"
 
 #include "cetlib_except/exception.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"

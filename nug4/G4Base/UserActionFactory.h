@@ -22,7 +22,7 @@
 #include <vector>
 #include <map>
 
-#include "nutools/G4Base/UserAction.h"
+#include "nug4/G4Base/UserAction.h"
 
 namespace g4b {
 

@@ -42,7 +42,7 @@
 //
 
 #include "Geant4/G4Version.hh"
-#include "nutools/G4Base/G4PhysListFactorySingleton.hh"
+#include "nug4/G4Base/G4PhysListFactorySingleton.hh"
 
 // for C++17 __cplusplus = 201703L
 // INCLXX currently use std:::random_shuffle which strictly isn't

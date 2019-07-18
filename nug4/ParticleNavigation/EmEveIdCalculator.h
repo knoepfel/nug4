@@ -55,7 +55,7 @@
 #ifndef SIM_EmEveIdCalculator_H
 #define SIM_EmEveIdCalculator_H
 
-#include "nutools/ParticleNavigation/EveIdCalculator.h"
+#include "nug4/ParticleNavigation/EveIdCalculator.h"
 
 ///Monte Carlo Simulation
 namespace sim {

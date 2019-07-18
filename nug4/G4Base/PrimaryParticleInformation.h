@@ -32,7 +32,7 @@
 #ifndef G4BASE_PrimaryParticleInformation_h
 #define G4BASE_PrimaryParticleInformation_h
 
-// nutools
+// nusimdata
 #include "nusimdata/SimulationBase/simb.h" // simb::GeneratedParticleIndex_t
 
 // G4 Includes

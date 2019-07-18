@@ -6,9 +6,9 @@
 /// \author  seligman@nevis.columbia.edu, brebel@fnal.gov
 ////////////////////////////////////////////////////////////////////////
 
-#include "nutools/G4Base/G4Helper.h"
-#include "nutools/G4Base/DetectorConstruction.h"
-#include "nutools/G4Base/UserActionManager.h"
+#include "nug4/G4Base/G4Helper.h"
+#include "nug4/G4Base/DetectorConstruction.h"
+#include "nug4/G4Base/UserActionManager.h"
 
 #include "nusimdata/SimulationBase/MCTruth.h"
 
@@ -30,12 +30,12 @@
 #include "Geant4/QGSP_BERT.hh"
 #define TRY_NEW_PL_FACTORY
 #ifdef  TRY_NEW_PL_FACTORY
-#include "nutools/G4Base/G4PhysListFactory.hh"
+#include "nug4/G4Base/G4PhysListFactory.hh"
 #else
 #include "Geant4/G4PhysListFactory.hh"
 #endif
 // 
-#include "nutools/G4Base/G4PhysicsProcessFactorySingleton.hh"
+#include "nug4/G4Base/G4PhysicsProcessFactorySingleton.hh"
 #include "Geant4/G4VModularPhysicsList.hh"
 
 #include <Rtypes.h>

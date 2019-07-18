@@ -1,6 +1,6 @@
 
 art_make( LIB_LIBRARIES nusimdata_SimulationBase
-                        nutools_MagneticField_MagneticField_service
+                        nug4_MagneticField_MagneticField_service
 			canvas
                         ${MF_MESSAGELOGGER}
                         ${MF_UTILITIES}
