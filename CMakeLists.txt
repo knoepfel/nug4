@@ -1,8 +1,8 @@
 # ======================================================================
-#  nutools main build file
+#  nug4 main build file
 #
 #  cd .../path/to/build/directory
-#  source .../path/to/nutools/ups/setup_for_development
+#  source .../path/to/nug4/ups/setup_for_development
 #  cmake [-DCMAKE_INSTALL_PREFIX=/install/path]
 #        -DCMAKE_BUILD_TYPE=$CETPKG_TYPE
 #        $CETPKG_SOURCE
@@ -15,7 +15,7 @@
 
 cmake_minimum_required(VERSION 3.11)  # use cmake 3.11 or later
 
-project(nutools)
+project(nug4)
 
 # cetbuildtools contains our cmake modules
 find_package(cetbuildtools REQUIRED)
@@ -38,8 +38,6 @@ cet_report_compiler_flags()
 # these are minimum required versions, not the actual product versions
 find_ups_product( art )
 find_ups_product(art_root_io)
-find_ups_product( libwda )
-find_ups_product( postgresql )
 find_ups_product( nusimdata )
 find_ups_product( cetlib )
 find_ups_product( cetlib_except )
@@ -47,18 +45,6 @@ find_ups_geant4( )
 find_ups_product( cetbuildtools )
 
 message(STATUS "ROOTSYS is ${ROOTSYS}")
-
-## find_library directives
-# other dependencies
-cet_find_library( CRY NAMES CRY PATHS ENV CRY_LIB NO_DEFAULT_PATH )
-
-# ifdhc
-cet_find_library( IFDH NAMES ifdh PATHS ENV IFDHC_LIB NO_DEFAULT_PATH )
-include_directories( $ENV{IFDHC_FQ_DIR}/inc )
-
-# ifdhc_art  # as a service
-cet_find_library( IFDH_SERVICE NAMES IFDH_service PATHS ENV IFDH_ART_LIB NO_DEFAULT_PATH )
-include_directories( $ENV{IFDH_ART_FQ_DIR}/inc )
 
 # macros
 include(ArtMake)
@@ -68,16 +54,9 @@ include(CetRootCint)
 # include search path
 include_directories ( $ENV{G4INCLUDE} )
 include_directories ( $ENV{XERCES_C_INC} )
-include_directories ( $ENV{CRYHOME}/src )
-
-# included for Mac OSX using XQuartz for X11
-if(APPLE)
-  include_directories ( /opt/X11/include )
-endif()
 
 # source
-add_subdirectory (nutools)
-add_subdirectory (tools)
+add_subdirectory (nug4)
 
 # ups - table and config files
 add_subdirectory(ups)
