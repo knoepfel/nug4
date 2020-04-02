@@ -4,9 +4,8 @@ simple_plugin( MagneticField service
                ${MF_UTILITIES}
 	       cetlib_except
                ${CLHEP}
-               ${ROOT_BASIC_LIB_LIST}
-               ${ROOT_GEOM} )
+               ${ROOT_LIBRARIES}
+               ROOT::Geom )
 
 install_headers()
 install_fhicl()
-install_source()

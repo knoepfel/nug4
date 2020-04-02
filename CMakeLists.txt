@@ -13,12 +13,13 @@
 #  make package (builds distribution tarfile)
 # ======================================================================
 
-cmake_minimum_required(VERSION 3.11)  # use cmake 3.11 or later
+cmake_minimum_required(VERSION 3.12)  # use cmake 3.12 or later
 
-project(nug4)
+project(nug4 VERSION 1.04.01 LANGUAGES CXX)
 
 # cetbuildtools contains our cmake modules
-find_package(cetbuildtools REQUIRED)
+set(fcl_dir job)
+find_package(cetmodules REQUIRED)
 
 list(APPEND CMAKE_MODULE_PATH
   $ENV{CANVAS_ROOT_IO_DIR}/Modules
@@ -27,40 +28,29 @@ list(APPEND CMAKE_MODULE_PATH
 include(CetCMakeEnv)
 cet_cmake_env()
 
-# -D_GLIBCXX_USE_NANOSLEEP is needed to make std::this_thread::sleep_for available. (IFDatabase)
-cet_set_compiler_flags(DIAGS CAUTIOUS WERROR
-                       NO_UNDEFINED
-                       EXTRA_FLAGS -pedantic
-                       EXTRA_CXX_FLAGS -D_GLIBCXX_USE_NANOSLEEP
-                                       -Wno-unused-local-typedefs -Wno-variadic-macros)
-cet_report_compiler_flags()
 
 # these are minimum required versions, not the actual product versions
-find_ups_product( art )
-find_ups_product(art_root_io)
-find_ups_product( nusimdata )
-find_ups_product( cetlib )
-find_ups_product( cetlib_except )
-find_ups_geant4( )
-find_ups_product( cetbuildtools )
-
-message(STATUS "ROOTSYS is ${ROOTSYS}")
-
+find_package( art )
+find_package( art_root_io)
+find_package( nusimdata )
+find_package( cetlib )
+find_package( cetlib_except )
+find_package( Geant4 )
+include(${Geant4_USE_FILE})
 # macros
 include(ArtMake)
 include(BuildPlugins)
 include(CetRootCint)
 
 # include search path
-include_directories ( $ENV{G4INCLUDE} )
+include_directories ( ${Geant4_INCLUDE_DIRS} )
 include_directories ( $ENV{XERCES_C_INC} )
 
 # source
 add_subdirectory (nug4)
 
 # ups - table and config files
-add_subdirectory(ups)
+#add_subdirectory(ups)
 
 # packaging utility
-include(UseCPack)
-
+add_subdirectory(cmakeConfig)

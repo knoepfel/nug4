@@ -6,30 +6,9 @@ art_make( LIB_LIBRARIES nusimdata_SimulationBase
                         ${MF_UTILITIES}
                         ${FHICLCPP}
                         cetlib
-                        ${G4FR}
-                        ${G4GMOCREN}
-                        ${G4RAYTRACER}
-                        ${G4TREE}
-                        ${G4VRML}
-                        ${G4EVENT}
-                        ${G4GEOMETRY}
-                        ${G4GLOBAL}
-                        ${G4INTERCOMS}
-                        ${G4MATERIALS}
-                        ${G4MODELING}
-                        ${G4PARTICLES}
-                        ${G4PERSISTENCY}
-                        ${G4PHYSICSLISTS}
-                        ${G4PROCESSES}
-                        ${G4READOUT}
-                        ${G4RUN}
-                        ${G4TRACKING}
-                        ${G4VISHEPREP}
-                        ${G4VIS_MANAGEMENT}
-                        ${XERCESC}
-                        ${CLHEP}
+                        ${CLHEP_LIBRARIES}
+                        ${Geant4_LIBRARIES}
                         )
 
 install_headers()
 install_fhicl()
-install_source()
