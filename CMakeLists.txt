@@ -13,9 +13,9 @@
 #  make package (builds distribution tarfile)
 # ======================================================================
 
-cmake_minimum_required(VERSION 3.11)  # use cmake 3.11 or later
+cmake_minimum_required(VERSION 3.12...3.18 FATAL_ERROR)
 
-project(nug4)
+project(nug4 LANGUAGES CXX)
 
 # cetbuildtools contains our cmake modules
 find_package(cetbuildtools REQUIRED)
