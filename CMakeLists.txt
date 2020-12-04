@@ -51,10 +51,6 @@ include(ArtMake)
 include(BuildPlugins)
 include(CetRootCint)
 
-# include search path
-include_directories ( $ENV{G4INCLUDE} )
-include_directories ( $ENV{XERCES_C_INC} )
-
 # source
 add_subdirectory (nug4)
 
