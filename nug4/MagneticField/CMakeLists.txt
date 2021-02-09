@@ -1,11 +1,17 @@
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
 
-simple_plugin( MagneticField service
-               ${MF_MESSAGELOGGER}
-               ${MF_UTILITIES}
-	       cetlib_except
-               ${CLHEP}
-               ${ROOT_BASIC_LIB_LIST}
-               ${ROOT_GEOM} )
+art_make(NO_PLUGINS
+          LIB_LIBRARIES
+          ${MF_MESSAGELOGGER}
+          ${MF_UTILITIES}
+          canvas
+          ${FHICLCPP}
+          cetlib
+          cetlib_except
+          ${CLHEP}
+          ${ROOT_BASIC_LIB_LIST}
+          ${ROOT_GEOM}
+         )
 
 install_headers()
 install_fhicl()
