@@ -30,6 +30,9 @@ namespace g4b {
     /// from G4VUserDetectorConstruction.
     G4VPhysicalVolume* Construct();
 
+    ///Set a custom Magnetic service
+    void SetCustomMagneticService();
+
     /// Return a pointer to the world volume.  This returns the same
     /// pointer as Construct(), but Construct() also does other
     /// actions such as setting up sensitive detectors.  World() just
