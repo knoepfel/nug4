@@ -10,7 +10,8 @@
 #include "cetlib_except/exception.h"
 
 #include "nug4/G4Base/DetectorConstruction.h"
-#include "nug4/MagneticField/MagneticField.h"
+#include "nug4/G4Base/GlobalMagneticField.h"
+#include "nug4/MagneticFieldServices/MagneticFieldService.h"
 
 #include "Geant4/G4VPhysicalVolume.hh"
 #include "Geant4/G4GDMLParser.hh"
@@ -60,10 +61,11 @@ namespace g4b{
   G4VPhysicalVolume* DetectorConstruction::Construct()
   {
     // Setup the magnetic field situation 
-    art::ServiceHandle<mag::MagneticField> bField;
-    
+    art::ServiceHandle<mag::MagneticFieldService> bField;
+    auto const * pProvider = bField->provider(); //get the provider
+
     // loop over the possible fields
-    for(auto fd : bField->Fields()){
+    for(auto fd : pProvider->Fields()){
       switch (fd.fMode) {
         case mag::kNoBFieldMode:
           /* NOP */
@@ -93,6 +95,44 @@ namespace g4b{
           
           break;
         } // case mag::kConstantBFieldMode
+        case mag::kFieldRZMapMode: {
+ 
+          // Attach this to the magnetized volume only, so get that volume
+          G4LogicalVolume *bvol = G4LogicalVolumeStore::GetInstance()->GetVolume(fd.fVolume);
+
+          mag::GlobalMagneticField *magField = new mag::GlobalMagneticField();
+          fFieldMgr = new G4FieldManager();
+          fFieldMgr->SetDetectorField(magField);
+          fFieldMgr->CreateChordFinder(magField);
+
+          MF_LOG_INFO("DetectorConstruction")
+          << "Setting magnetic field in kFieldRZMapMode to be"
+          << " in " << bvol->GetName();
+
+          // the boolean tells the field manager to use local volume
+          bvol->SetFieldManager(fFieldMgr, true);
+
+          break;
+        } // case mag::kFieldRZMapMode
+        case mag::kFieldXYZMapMode: {
+
+          // Attach this to the magnetized volume only, so get that volume
+          G4LogicalVolume *bvol = G4LogicalVolumeStore::GetInstance()->GetVolume(fd.fVolume);
+
+          mag::GlobalMagneticField *magField = new mag::GlobalMagneticField();
+          fFieldMgr = new G4FieldManager();
+          fFieldMgr->SetDetectorField(magField);
+          fFieldMgr->CreateChordFinder(magField);
+  
+          MF_LOG_INFO("DetectorConstruction")
+          << "Setting magnetic field in kFieldXYZMapMode to be"
+          << " in " << bvol->GetName();
+
+           // the boolean tells the field manager to use local volume
+          bvol->SetFieldManager(fFieldMgr, true);
+          
+          break;
+        } // case mag::kFieldXYZMapMode
         default: // Complain if the user asks for something not handled
           MF_LOG_ERROR("DetectorConstruction")
           << "Unknown or illegal Magneticfield "
