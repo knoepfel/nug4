@@ -10,6 +10,7 @@
 #include "cetlib_except/exception.h"
 
 #include "nug4/G4Base/DetectorConstruction.h"
+#include "nug4/G4Base/GlobalMagneticField.h"
 #include "nug4/MagneticFieldServices/MagneticFieldService.h"
 
 #include "Geant4/G4VPhysicalVolume.hh"
@@ -95,26 +96,40 @@ namespace g4b{
           break;
         } // case mag::kConstantBFieldMode
         case mag::kFieldRZMapMode: {
-          /* To implement */
-          
+ 
           // Attach this to the magnetized volume only, so get that volume
           G4LogicalVolume *bvol = G4LogicalVolumeStore::GetInstance()->GetVolume(fd.fVolume);
+
+          mag::GlobalMagneticField *magField = new mag::GlobalMagneticField();
+          fFieldMgr = new G4FieldManager();
+          fFieldMgr->SetDetectorField(magField);
+          fFieldMgr->CreateChordFinder(magField);
 
           MF_LOG_INFO("DetectorConstruction")
           << "Setting magnetic field in kFieldRZMapMode to be"
           << " in " << bvol->GetName();
 
+          // the boolean tells the field manager to use local volume
+          bvol->SetFieldManager(fFieldMgr, true);
+
           break;
         } // case mag::kFieldRZMapMode
         case mag::kFieldXYZMapMode: {
-          /* To implement */
 
           // Attach this to the magnetized volume only, so get that volume
           G4LogicalVolume *bvol = G4LogicalVolumeStore::GetInstance()->GetVolume(fd.fVolume);
+
+          mag::GlobalMagneticField *magField = new mag::GlobalMagneticField();
+          fFieldMgr = new G4FieldManager();
+          fFieldMgr->SetDetectorField(magField);
+          fFieldMgr->CreateChordFinder(magField);
   
           MF_LOG_INFO("DetectorConstruction")
           << "Setting magnetic field in kFieldXYZMapMode to be"
           << " in " << bvol->GetName();
+
+           // the boolean tells the field manager to use local volume
+          bvol->SetFieldManager(fFieldMgr, true);
           
           break;
         } // case mag::kFieldXYZMapMode

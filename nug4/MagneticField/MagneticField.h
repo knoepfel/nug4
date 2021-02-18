@@ -88,9 +88,16 @@ namespace mag {
       MagneticField& operator = (MagneticField &&) = delete;
       virtual ~MagneticField() = default;
 
+      //Return std::vector<MagneticFieldDescription>
       virtual std::vector<MagneticFieldDescription> const& Fields()                   const = 0;
+      
+      //Return the size of std::vector<MagneticFieldDescription>
       virtual size_t                                       NumFields()                const = 0;
+      
+      //Return the field mode
       virtual MagFieldMode_t                        const& UseField(size_t f)         const = 0;
+      
+      //return the magnetized volumes
       virtual std::string                           const& MagnetizedVolume(size_t f) const = 0;
 
       // return the field at a particular point

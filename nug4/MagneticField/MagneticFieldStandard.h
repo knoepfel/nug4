@@ -33,9 +33,16 @@ namespace mag {
 
       void reconfigure(fhicl::ParameterSet const& pset);
 
+      //Return std::vector<MagneticFieldDescription>
       std::vector<MagneticFieldDescription> const& Fields()                   const override { return fFieldDescriptions;            }
+
+      //Return the size of std::vector<MagneticFieldDescription>
       size_t                                       NumFields()                const override { return fFieldDescriptions.size();     }
+
+      //Return the field mode
       MagFieldMode_t                        const& UseField(size_t f)         const override { return fFieldDescriptions[f].fMode;   }
+
+      //return the magnetized volumes
       std::string                           const& MagnetizedVolume(size_t f) const override { return fFieldDescriptions[f].fVolume; }
 
       // return the field at a particular point
