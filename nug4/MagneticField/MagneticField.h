@@ -1,78 +1,119 @@
-/// \file MagneticField.h
-/// \brief Describe the magnetic field structure of a detector
-/// 
-/// \version $Id: MagneticField.h,v 1.3 2012-09-21 02:46:38 greenc Exp $
-/// \author dmckee@phys.ksu.edu
-//////////////////////////////////////////////////////////////////////////
-/// \namespace mag
-/// A namespace for simulated magnetic fields
-//////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+// \file MagneticField.h
+//
+// \brief pure virtual base interface for magnetic fields
+//
+// \author ebrianne@fnal.gov
+//
+////////////////////////////////////////////////////////////////////////
 #ifndef MAG_MAGNETICFIELD_H
 #define MAG_MAGNETICFIELD_H
 
+// std includes
 #include <string>
-
-#include "TGeoVolume.h"
+#include <vector>
 
 // Geant4 includes
 #include "Geant4/G4ThreeVector.hh"
 
-// Framework includes
-#include "fhiclcpp/ParameterSet.h"
-#include "art/Framework/Services/Registry/ActivityRegistry.h"
-#include "art/Framework/Services/Registry/ServiceHandle.h"
-#include "art/Framework/Services/Registry/ServiceMacros.h"
+// ROOT includes
+#include "TGeoVolume.h"
+#include "TVector3.h"
 
 namespace mag {
+
+  // assumes a square grid of R, Z samples for speed in lookup, starting at an origin 0,0
+  struct RZFieldMap
+  {
+      TVector3 CoordOffset;
+      TVector3 ZAxis;
+      float dr;
+      float dz;
+      std::vector<std::vector<float>> br;
+      std::vector<std::vector<float>> bz;
+      size_t nr() const { return br.size(); };
+      size_t nz() const
+      {
+          if(nr() > 0)
+          {
+              return br[0].size();
+          }
+          else
+          {
+              return 0;
+          }
+      };
+  };
+
+  using Field3D = std::vector<std::vector<std::vector<float>>>;
+  struct XYZFieldMap
+  {
+      TVector3 CoordOffset;
+      TVector3 ZAxis;
+      bool UseSymmetry;
+      float xo, yo, zo;
+      float dx, dy, dz;
+      Field3D fx;
+      Field3D fy;
+      Field3D fz;
+  };
 
   typedef enum MagneticFieldMode {
     kAutomaticBFieldMode=-1, // Used by DriftElectronsAlg
     kNoBFieldMode=0,         // no field
-    kConstantBFieldMode=1    // constant field
+    kConstantBFieldMode=1,   // constant field
+    kFieldRZMapMode= 2, // read a map as a function of r and z
+    kFieldXYZMapMode= 3 // read a map as a function of x,y,z
     /*, kFieldMapMode, ... */
   } MagFieldMode_t;
-
+  
   struct MagneticFieldDescription
   {
     MagFieldMode_t fMode;   ///< type of field used
     G4ThreeVector  fField;  ///< description of the field (uniform only)
     G4String       fVolume; ///< G4 volume containing the field
     TGeoVolume*    fGeoVol; ///< pointer to TGeoVolume with the field
+    std::string    fFieldMapFilename; ///< file name for reading in the field map
+    RZFieldMap     fRZFieldMap; ///< RZ field map if needed
+    XYZFieldMap    fXYZFieldMap; ///< XYZ field map if needed
+    float          fScaleFactor; ///< Used to scale the magnetic field.
   };
 
-  // Specifies the magnetic field over all space
-  //
-  // The default implementation, however, uses a nearly trivial,
-  // non-physical hack.
   class MagneticField {
-  public:
-    MagneticField(fhicl::ParameterSet const& pset, art::ActivityRegistry& reg);
-    ~MagneticField(){};
-
-    void reconfigure(fhicl::ParameterSet const& pset);
-
-    std::vector<MagneticFieldDescription> const& Fields()                   const { return fFieldDescriptions;            }
-    size_t                                       NumFields()                const { return fFieldDescriptions.size();     }
-    MagFieldMode_t                        const& UseField(size_t f)         const { return fFieldDescriptions[f].fMode;   }
-    std::string                           const& MagnetizedVolume(size_t f) const { return fFieldDescriptions[f].fVolume; }
-
-    // return the field at a particular point
-    G4ThreeVector  const FieldAtPoint(G4ThreeVector const& p=G4ThreeVector(0)) const;
-
-    // This method will only return a uniform field based on the input
-    // volume name.  If the input volume does not have a uniform field
-    // caveat emptor
-    G4ThreeVector  const UniformFieldInVolume(std::string const& volName) const;
+    public:
     
-  private:
-    // The simplest implmentation has a constant field inside a named
-    // detector volume
-    std::vector<MagneticFieldDescription> fFieldDescriptions; ///< Descriptions of the fields
-    
-    ///\todo Need to add ability to read in a field from a database
+      MagneticField(const MagneticField &) = delete;
+      MagneticField(MagneticField &&) = delete;
+      MagneticField& operator = (const MagneticField &) = delete;
+      MagneticField& operator = (MagneticField &&) = delete;
+      virtual ~MagneticField() = default;
+
+      //Return std::vector<MagneticFieldDescription>
+      virtual std::vector<MagneticFieldDescription> const& Fields()                   const = 0;
+      
+      //Return the size of std::vector<MagneticFieldDescription>
+      virtual size_t                                       NumFields()                const = 0;
+      
+      //Return the field mode
+      virtual MagFieldMode_t                        const& UseField(size_t f)         const = 0;
+      
+      //return the magnetized volumes
+      virtual std::string                           const& MagnetizedVolume(size_t f) const = 0;
+
+      // return the field at a particular point
+      virtual G4ThreeVector const FieldAtPoint(G4ThreeVector const& p=G4ThreeVector(0)) const = 0;
+
+      // This method will only return a uniform field based on the input
+      // volume name.  If the input volume does not have a uniform field
+      // caveat emptor
+      virtual G4ThreeVector const UniformFieldInVolume(std::string const& volName) const = 0;
+
+    protected:
+
+      MagneticField() = default;
+  
   };
 
 }
 
-DECLARE_ART_SERVICE(mag::MagneticField, LEGACY)
 #endif // MAG_MAGNETICFIELD_H
