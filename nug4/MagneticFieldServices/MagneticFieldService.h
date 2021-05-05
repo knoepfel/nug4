@@ -12,7 +12,7 @@
 #include "nug4/MagneticField/MagneticField.h"
 
 #include "art/Framework/Services/Registry/ServiceHandle.h"
-#include "art/Framework/Services/Registry/ServiceMacros.h"
+#include "art/Framework/Services/Registry/ServiceDeclarationMacros.h"
 
 namespace mag {
   class MagneticFieldService {
