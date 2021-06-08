@@ -2,7 +2,7 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
 
 art_make(NO_PLUGINS
           LIB_LIBRARIES
-          messagefacility::MFMessageLogger
+          messagefacility::MF_MessageLogger
           messagefacility::headers
           canvas
           fhiclcpp::fhiclcpp fhiclcpp::types

@@ -2,7 +2,7 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
 
 simple_plugin( MagneticFieldServiceStandard "service"
             LIBRARIES
-            messagefacility::MFMessageLogger
+            messagefacility::MF_MessageLogger
             messagefacility::headers
             cetlib_except
             nug4_MagneticField

@@ -4,7 +4,7 @@ art_make( LIB_LIBRARIES nusimdata_SimulationBase
                         nug4_MagneticField
 			canvas
                         ${ART_FRAMEWORK_SERVICES_REGISTRY}
-                        messagefacility::MFMessageLogger
+                        messagefacility::MF_MessageLogger
                         messagefacility::headers
                         fhiclcpp::fhiclcpp fhiclcpp::types
                         cetlib
