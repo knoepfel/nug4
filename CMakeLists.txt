@@ -43,6 +43,8 @@ find_ups_root()
 
 message(STATUS "ROOTSYS is ${ROOTSYS}")
 
+find_package(messagefacility)
+
 # macros
 include(ArtMake)
 include(BuildPlugins)
