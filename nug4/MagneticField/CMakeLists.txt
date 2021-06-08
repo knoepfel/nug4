@@ -8,7 +8,7 @@ art_make(NO_PLUGINS
           fhiclcpp::fhiclcpp fhiclcpp::types
           cetlib
           cetlib_except
-          ${CLHEP}
+          
           ${ROOT_BASIC_LIB_LIST}
           ${ROOT_GEOM}
          )

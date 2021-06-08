@@ -30,7 +30,7 @@ art_make( LIB_LIBRARIES nusimdata_SimulationBase
                         Geant4::G4visHepRep
                         Geant4::G4vis_management
                         ${XERCESC}
-                        ${CLHEP}
+                        
                         )
 
 install_headers()
