@@ -2,10 +2,10 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
 
 art_make(NO_PLUGINS
           LIB_LIBRARIES
-          ${MF_MESSAGELOGGER}
-          ${MF_UTILITIES}
+          messagefacility::MFMessageLogger
+          messagefacility::headers
           canvas
-          ${FHICLCPP}
+          fhiclcpp::fhiclcpp fhiclcpp::types
           cetlib
           cetlib_except
           ${CLHEP}
