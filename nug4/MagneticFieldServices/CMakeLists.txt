@@ -6,7 +6,7 @@ simple_plugin( MagneticFieldServiceStandard "service"
             messagefacility::headers
             cetlib_except
             nug4_MagneticField
-            ${CLHEP}
+            
             ${ROOT_BASIC_LIB_LIST}
             ${ROOT_GEOM} )
 
