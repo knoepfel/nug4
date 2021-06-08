@@ -11,8 +11,8 @@ art_make( NO_PLUGINS
 			art_Persistency_Provenance
 			art_Utilities
 			canvas
-			${MF_MESSAGELOGGER}
-			${MF_UTILITIES}
+			messagefacility::MFMessageLogger
+			messagefacility::headers
         		cetlib
 			cetlib_except
 			${ROOT_BASIC_LIB_LIST}
