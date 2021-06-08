@@ -14,7 +14,7 @@ art_make( LIB_LIBRARIES nusimdata_SimulationBase
                         Geant4::G4RayTracer
                         Geant4::G4Tree
                         Geant4::G4VRML
-                        Geant4::G4Event
+                        Geant4::G4event
                         Geant4::G4geometry
                         Geant4::G4global
                         Geant4::G4intercoms
