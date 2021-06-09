@@ -31,15 +31,15 @@ cet_set_compiler_flags(DIAGS CAUTIOUS WERROR
 cet_report_compiler_flags()
 
 # these are minimum required versions, not the actual product versions
-find_ups_product( art )
 find_ups_product(art_root_io)
 find_ups_product(canvas_root_io)
 find_ups_product( nusimdata )
 find_ups_product( clhep )
 find_ups_product( cetlib )
 find_ups_product( cetlib_except )
-find_ups_geant4( )
 find_ups_root()
+find_package( art COMPONENTS FrameworkCore )
+find_package( geant4 COMPONENTS G4Mocren)
 
 message(STATUS "ROOTSYS is ${ROOTSYS}")
 
