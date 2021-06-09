@@ -4,9 +4,9 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
 
 art_make( NO_PLUGINS
           LIB_LIBRARIES nusimdata_SimulationBase
-                        ${ART_FRAMEWORK_CORE}
-			${ART_FRAMEWORK_PRINCIPAL}
-			${ART_FRAMEWORK_SERVICES_REGISTRY}
+                        art::Framwork_Core
+			art::Framework_Principal
+			art::Framework_Services_Registry
 			art_Persistency_Common
 			art_Persistency_Provenance
 			art_Utilities
