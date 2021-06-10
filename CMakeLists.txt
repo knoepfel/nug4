@@ -39,7 +39,7 @@ find_ups_product( cetlib )
 find_ups_product( cetlib_except )
 find_ups_root()
 find_package( art )
-find_package( geant4 COMPONENTS G4Mocren)
+find_package( geant4 COMPONENTS G4FR G4Mocren G4RayTracer G4Tree G4VRML G4event G4geometry G4global G4intercoms G4materials G4modeling G4particles G4persistency G4physicslists G4processes G4readout G4run G4tracking G4visHepRep G4vis_management)
 
 message(STATUS "ROOTSYS is ${ROOTSYS}")
 
