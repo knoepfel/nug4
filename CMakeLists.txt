@@ -39,7 +39,28 @@ find_ups_product( cetlib )
 find_ups_product( cetlib_except )
 find_ups_root()
 find_package( art )
-find_package( geant4 COMPONENTS G4FR G4Mocren G4RayTracer G4Tree G4VRML G4event G4geometry G4global G4intercoms G4materials G4modeling G4particles G4persistency G4physicslists G4processes G4readout G4run G4tracking G4visHepRep G4vis_management)
+find_package( Geant4 REQUIRED CONFIG OPTIONAL_COMPONENTS 
+    Geant4::G4FR
+    Geant4::G4GMocren
+    Geant4::G4RayTracer
+    Geant4::G4Tree
+    Geant4::G4VRML
+    Geant4::G4event
+    Geant4::G4geometry
+    Geant4::G4global
+    Geant4::G4intercoms
+    Geant4::G4materials
+    Geant4::G4modeling
+    Geant4::G4particles
+    Geant4::G4persistency
+    Geant4::G4physicslists
+    Geant4::G4processes
+    Geant4::G4readout
+    Geant4::G4run
+    Geant4::G4tracking
+    Geant4::G4visHepRep
+    Geant4::G4vis_management
+)
 
 message(STATUS "ROOTSYS is ${ROOTSYS}")
 
