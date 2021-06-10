@@ -38,7 +38,7 @@ find_ups_product( clhep )
 find_ups_product( cetlib )
 find_ups_product( cetlib_except )
 find_ups_root()
-find_package( art COMPONENTS FrameworkCore )
+find_package( art )
 find_package( geant4 COMPONENTS G4Mocren)
 
 message(STATUS "ROOTSYS is ${ROOTSYS}")
