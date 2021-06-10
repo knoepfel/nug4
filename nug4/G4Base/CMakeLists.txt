@@ -10,7 +10,7 @@ art_make( LIB_LIBRARIES nusimdata_SimulationBase
                         cetlib
                         cetlib_except
                         Geant4::G4FR
-                        Geant4::G4Mocren
+                        Geant4::G4GMocren
                         Geant4::G4RayTracer
                         Geant4::G4Tree
                         Geant4::G4VRML
