@@ -73,6 +73,7 @@ include(CetRootCint)
 
 # source
 add_subdirectory (nug4)
+add_subdirectory (cmakeConfig)
 
 # ups - table and config files
 if(WANT_UPS)
