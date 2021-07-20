@@ -12,6 +12,7 @@ art_make(NO_PLUGINS
           ${CLHEP}
           ${ROOT_BASIC_LIB_LIST}
           ${ROOT_GEOM}
+          PUBLIC ${G4GEOMETRY}
          )
          
 install_headers()
