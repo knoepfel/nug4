@@ -20,7 +20,7 @@ art_root_io     v1_08_02
 nusimdata       v1_24_03
 geant4          v4_10_6_p01d
 pythia8         v8_3_05
-cetbuildtools   v8_10_01        -        only_for_build
+cetbuildtools   v8_11_01        -        only_for_build
 end_product_list
 
 
