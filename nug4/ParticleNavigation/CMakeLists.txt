@@ -4,17 +4,17 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
 
 art_make( NO_PLUGINS
           LIB_LIBRARIES nusimdata_SimulationBase
-                        ${ART_FRAMEWORK_CORE}
-			${ART_FRAMEWORK_PRINCIPAL}
-			${ART_FRAMEWORK_SERVICES_REGISTRY}
-			art_Persistency_Common
-			art_Persistency_Provenance
-			art_Utilities
-			canvas
-			${MF_MESSAGELOGGER}
+                        art::Framework_Core
+			art::Framework_Principal
+			art::Framework_Services_Registry
+			art::Persistency_Common
+			art::Persistency_Provenance
+			art::Utilities
+			canvas::canvas
+			messagefacility::MF_MessageLogger
 			${MF_UTILITIES}
-        		cetlib
-			cetlib_except
+        		cetlib::cetlib
+			cetlib_except::cetlib_except
 			${ROOT_BASIC_LIB_LIST}
         )
 
