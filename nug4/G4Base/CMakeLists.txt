@@ -2,12 +2,12 @@
 art_make( LIB_LIBRARIES nusimdata_SimulationBase
                         nug4_MagneticFieldServices_MagneticFieldServiceStandard_service
                         nug4_MagneticField
-			                  canvas
+			                  canvas::canvas
                         ART_FRAMEWORK_SERVICES_REGISTRY
                         MF_MESSAGELOGGER
                         FHICLCPP
-                        cetlib
-                        cetlib_except
+                        cetlib::cetlib
+                        cetlib_except::cetlib_except
                         G4FR
                         G4GMOCREN
                         G4RAYTRACER
