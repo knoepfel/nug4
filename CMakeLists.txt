@@ -39,6 +39,7 @@ find_ups_product( nusimdata )
 find_ups_product( cetlib )
 find_ups_product( cetlib_except )
 find_ups_geant4( )
+find_ups_product( pythia8 )  # needed for finding include files
 find_ups_root()
 
 message(STATUS "ROOTSYS is ${ROOTSYS}")
