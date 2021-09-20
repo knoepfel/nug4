@@ -4,15 +4,15 @@ art_make(NO_PLUGINS
           LIB_LIBRARIES
           G4GEOMETRY
           messagefacility::MF_MessageLogger
-          ${MF_UTILITIES}
+          
           canvas::canvas
           fhiclcpp::fhiclcpp
           cetlib::cetlib
           cetlib_except::cetlib_except
-          ${CLHEP}
+          CLHEP
           ${ROOT_BASIC_LIB_LIST}
-          ${ROOT_GEOM}
-          PUBLIC ${G4GEOMETRY}
+          ROOT::Geom
+          PUBLIC G4GEOMETRY
          )
          
 install_headers()

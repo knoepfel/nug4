@@ -1,5 +1,5 @@
 
-art_make( LIB_LIBRARIES nusimdata_SimulationBase
+art_make( LIB_LIBRARIES nusimdata::SimulationBase
                         nug4_MagneticFieldServices_MagneticFieldServiceStandard_service
                         nug4_MagneticField
 			                  canvas::canvas
