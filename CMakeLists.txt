@@ -39,6 +39,7 @@ find_ups_product( nusimdata )
 find_ups_product( clhep )
 find_ups_product( cetlib )
 find_ups_product( cetlib_except )
+find_ups_product( pythia8 )
 find_ups_geant4( )
 find_ups_root()
 
