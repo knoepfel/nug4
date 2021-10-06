@@ -15,7 +15,7 @@
 
 cmake_minimum_required(VERSION 3.18.2 FATAL_ERROR)
 
-project(nug4 LANGUAGES CXX)
+project(nug4 VERSION 1.10.00 LANGUAGES CXX)
 
 # cetbuildtools contains our cmake modules
 find_package(cetbuildtools REQUIRED)
