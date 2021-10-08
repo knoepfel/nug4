@@ -28,15 +28,11 @@
 #include <boost/algorithm/string.hpp>
 
 #include "Geant4/QGSP_BERT.hh"
-#define TRY_NEW_PL_FACTORY
-#ifdef  TRY_NEW_PL_FACTORY
-#include "nug4/G4Base/G4PhysListFactory.hh"
-#else
-#include "Geant4/G4PhysListFactory.hh"
-#endif
-// 
-#include "nug4/G4Base/G4PhysicsProcessFactorySingleton.hh"
+
 #include "Geant4/G4VModularPhysicsList.hh"
+
+#include "Geant4/G4PhysListFactoryAlt.hh"
+#include "Geant4/G4PhysicsConstructorRegistry.hh"
 
 #include <Rtypes.h>
 
@@ -49,7 +45,7 @@
 namespace g4b{
 
   static G4VisExecutive* vm_ = 0;
-  
+
   //------------------------------------------------
   // Constructor
   G4Helper::G4Helper()
@@ -65,7 +61,7 @@ namespace g4b{
 
   //------------------------------------------------
   // Constructor
-  G4Helper::G4Helper(std::string const& g4macropath, 
+  G4Helper::G4Helper(std::string const& g4macropath,
                      std::string const& g4physicslist,
                      std::string const& gdmlFile)
   : fG4MacroPath       (g4macropath  )
@@ -82,18 +78,18 @@ namespace g4b{
     // is created.
     fRunManager = new G4RunManager;
 
-    // Get the pointer to the User Interface manager   
-    fUIManager = G4UImanager::GetUIpointer();  
+    // Get the pointer to the User Interface manager
+    fUIManager = G4UImanager::GetUIpointer();
 
     fParallelWorlds.clear();
   }
 
   //------------------------------------------------
   // Destructor
-  G4Helper::~G4Helper() 
+  G4Helper::~G4Helper()
   {
     if( vm_ ) delete vm_;
-    
+
     if ( fRunManager != 0 ){
       // In SetUserAction(), we set all the G4 user-action classes to be the
       // same action: G4Base::UserActionManager This is convenient, but
@@ -101,21 +97,21 @@ namespace g4b{
       // G4UserRunAction, then it tries to delete the
       // G4UserEventAction... but that's the same object, which has
       // already been deleted.  Crash.
-    
+
       // To keep this from happening, handle the UserActionManager
       // clean-up manually, then tell the G4RunManager that all those
       // classes no longer exist.
-    
+
       g4b::UserActionManager* uaManager = UserActionManager::Instance();
       bool wasStacking = uaManager->DoesAnyActionProvideStacking();
       uaManager->Close();
-    
+
       // Each one of these G4RunManager::SetUserAction methods calls a
       // different method, based on the type of the argument.  We want
       // to use "0" (a null pointer), but we have to cast that "0" to a
       // particular type in order for the right SetUserAction method to
       // be called.
-    
+
       fRunManager->SetUserAction( static_cast<G4UserRunAction*>(0) );
       fRunManager->SetUserAction( static_cast<G4UserEventAction*>(0) );
       fRunManager->SetUserAction( static_cast<G4UserTrackingAction*>(0) );
@@ -135,7 +131,7 @@ namespace g4b{
       if(fParallelWorlds[i]) delete fParallelWorlds[i];
     }
     fParallelWorlds.clear();
-  
+
   }
 
   //------------------------------------------------
@@ -157,13 +153,13 @@ namespace g4b{
     /// talk given at JPL by Dennis Wright)
     ///
     /// if we decide that QGSP_BERT is not what we want, then we will
-    /// have to write a new physics list class that derives from 
+    /// have to write a new physics list class that derives from
     /// G4VUserPhysicsList that does what we want.
 
     G4VUserPhysicsList* physics = 0;
     std::string bywhom = "User";
-    std::string factoryname = "G4PhysListFactory";
-    bool list_known_procs = true;
+    std::string factoryname = "g4alt::G4PhysListFactory";
+    bool list_known_ctors = true;
 
     // physics list name is the first part, anything afterwards is
     // extra physics processes to be added to the base list
@@ -180,49 +176,25 @@ namespace g4b{
     std::string phListName = pstrings[0];
 
     //for (unsigned int j=0; j < pstrings.size(); ++j )
-    //  std::cout << "G4Helper pstrings[" << j << "] = \"" 
+    //  std::cout << "G4Helper pstrings[" << j << "] = \""
     //            << pstrings[j] << "\"" << std::endl;
 
-    if ( ! physics ) {
-#ifdef TRY_NEW_PL_FACTORY
-      // user extensible physics list factory
-      alt::G4PhysListFactory factory;
-      factoryname = "alt::G4PhysListFactory";
-#else
-      // The official Geant4 G4PhysListFactory _isn't_ a modern factory;
-      // it can only generate items that have pre-programmed blueprints
-      // already known to it (via if/else-if calls to various ctors) and
-      // is not user extensible (i.e. you can't send it blueprints and 
-      // have it make them for you).  If we have our own physics list 
-      // then we need to select on and construct it ourselves before 
-      // looking to the factory.
+    // user extensible physics list factory
+    g4alt::G4PhysListFactory factory;
+    factoryname = "g4alt::G4PhysListFactory";
 
-      // Put if/then/else statement here for user defined physics lists
-      // when using old stodgy offical G4 factory.
-      // Example:
-      /*
-      //         string name                                actual class ctor
-      if      ( "MY_COOL_PL"  == phListName ) {physics = new My_Cool_PL();}
-      else if ( "MY_OTHER_PL" == phListName ) {physics = new My_Other_PL();}
-      */
-
-      G4PhysListFactory factory;   // official G4 factory
-#endif
-
-      if ( ! physics ) {
-        if ( factory.IsReferencePhysList(phListName) ) {
-          bywhom  = factoryname;
-          physics = factory.GetReferencePhysList(phListName);
-        }
-        else {
-          // in the case of non-default name
-          if ( phListName != "" ) {
-            std::cerr << std::endl << factoryname
-            << " failed to find ReferencePhysList \""
-            << phListName << "\"" << std::endl;
-#ifdef TRY_NEW_PL_FACTORY
-            factory.PrintAvailablePhysLists();
-#else
+    if ( factory.IsReferencePhysList(phListName) ) {
+      bywhom  = factoryname;
+      physics = factory.GetReferencePhysList(phListName);
+    }
+    else {
+      // in the case of non-default name
+      if ( phListName != "" ) {
+        std::cerr << std::endl << factoryname
+                  << " failed to find ReferencePhysList \""
+                  << phListName << "\"" << std::endl;
+        factory.PrintAvailablePhysLists();
+/* #else
             std::vector<G4String> list = factory.AvailablePhysLists();
             MF_LOG_VERBATIM("G4Helper")
             << "For reference: PhysicsLists in G4PhysListFactory are: ";
@@ -231,22 +203,20 @@ namespace g4b{
               << " [" << std::setw(2) << indx << "] "
               << "\"" << list[indx] << "\"";
             }
-#endif
-          }
-        } // query factory
-      }  // no predetermined user list
+#endif */
+      }
 
       if ( ! physics ) {
         MF_LOG_ERROR("G4Helper")
-        << "G4PhysListFactory could not construct \""
-        << phListName
-        << "\","
-        << std::endl
-        << "fall back to using QGSP_BERT";
+          << bywhom << "  could not construct \""
+          << phListName
+          << "\","
+          << std::endl
+          << "FAIL hard if we don't succeed"; //"fall back to using QGSP_BERT";
 
-        physics = new QGSP_BERT;
-        phListName = "QGSP_BERT";
-        
+        physics = 0; //new QGSP_BERT; // FAIL if not succeed
+        phListName = "<none>"; // "QGSP_BERT";
+
       } else {
         MF_LOG_VERBATIM("G4Helper")
         << bywhom
@@ -266,8 +236,8 @@ namespace g4b{
 
       // break off UI commands from process name
       std::vector< std::string > physProcParts;
-      boost::algorithm::split( physProcParts, physProcAddition, 
-                               boost::is_any_of("(,)"), 
+      boost::algorithm::split( physProcParts, physProcAddition,
+                               boost::is_any_of("(,)"),
                                boost::token_compress_on );
       // trim lead/trail spaces
       for (unsigned int j=0; j < physProcParts.size(); ++j )
@@ -276,23 +246,26 @@ namespace g4b{
       // element 0 is the physics process name
       std::string physProcName = physProcParts[0];
       if ( physProcName == "" ) continue;  // not real, user has trailing ";"
-      G4PhysicsProcessFactorySingleton& procFactory = 
-        G4PhysicsProcessFactorySingleton::Instance();
 
-      if ( ! procFactory.IsKnownPhysicsProcess(physProcName) ) {
+      G4PhysicsConstructorRegistry* pcRegistry =
+        G4PhysicsConstructorRegistry::Instance();
+
+      if ( ! pcRegistry->IsKnownPhysicsConstructor(physProcName) ) {
+
         MF_LOG_VERBATIM("G4Helper")
         << "G4PhysicsProcessFactorySingleton could not "
         << "construct a \""
         << physProcName
         << "\"";
-        
-        if ( ! list_known_procs ) continue;
-        list_known_procs = false;
-        std::vector<G4String> list = procFactory.AvailablePhysicsProcesses();
+
+        if ( ! list_known_ctors ) continue;
+        // make sure we only do this once
+        list_known_ctors = false;
+        std::vector<G4String> list = pcRegistry->AvailablePhysicsConstructors();
         MF_LOG_VERBATIM("G4Helper")
         << "For reference: PhysicsProcesses in "
         << "G4PhysicsProcessFactorySingleton are: ";
-        
+
         if ( list.empty() )
           MF_LOG_VERBATIM("G4Helper")
           << " ... no registered processes";
@@ -314,7 +287,8 @@ namespace g4b{
       << "\"";
 
       // construct physics process, add it to the base physics list
-      G4VPhysicsConstructor* pctor = procFactory.GetPhysicsProcess(physProcName);
+      G4VPhysicsConstructor* pctor =
+        pcRegistry->GetPhysicsConstructor(physProcName);
 
 
       G4VModularPhysicsList* mpl = dynamic_cast<G4VModularPhysicsList*>(physics);
@@ -330,7 +304,7 @@ namespace g4b{
         if ( physProcParts[i] == "" ) continue;
         MF_LOG_VERBATIM("G4Helper")
         << physProcParts[i];
-        
+
         fUIManager->ApplyCommand(physProcParts[i]);
       }
 
@@ -348,7 +322,7 @@ namespace g4b{
     }
 
     // pass off (possibly augmented) physics list to run manager
-    // which calls G4RunManagerKernel->SetPhysics() on it 
+    // which calls G4RunManagerKernel->SetPhysics() on it
     //   which itself call ConstructParticle() for the list
     fRunManager->SetUserInitialization(physics);
   }
@@ -397,14 +371,14 @@ namespace g4b{
       << volumeName
       << " and set step size limit";
     }
-    
+
     return;
   }
 
-  
+
   //------------------------------------------------
   /// Initialization for the Geant4 Monte Carlo.
-  void G4Helper::InitPhysics() 
+  void G4Helper::InitPhysics()
   {
     if(!fDetector) this->ConstructDetector(fGDMLFile);
 
@@ -416,20 +390,20 @@ namespace g4b{
 
     // Pass the detector geometry on to Geant4.
     fRunManager->SetUserInitialization(fDetector);
-  
+
     // Tell the Geant4 run manager how to generate events.  The
     // ConvertMCTruthToG4 class will "generate" events by
     // converting MCTruth objects from the input into G4Events.
     fConvertMCTruth = new ConvertMCTruthToG4;
     fRunManager->SetUserAction(fConvertMCTruth);
-    
+
     return;
   }
 
 
   //------------------------------------------------
   /// Initialization for the Geant4 Monte Carlo.
-  void G4Helper::SetUserAction() 
+  void G4Helper::SetUserAction()
   {
     // Geant4 comes with "user hooks" that allows users to perform
     // special tasks at the beginning and end of runs, events, tracks,
@@ -470,26 +444,26 @@ namespace g4b{
       G4String command = "/control/execute " + G4String(fG4MacroPath);
       fUIManager->ApplyCommand(command);
     }
- 
+
 
     return;
   }
 
   //------------------------------------------------
-  bool G4Helper::G4Run(art::Ptr<simb::MCTruth>& primary) 
+  bool G4Helper::G4Run(art::Ptr<simb::MCTruth>& primary)
   {
     return this->G4Run( primary.get() );
   }
 
   //------------------------------------------------
-  bool G4Helper::G4Run(const simb::MCTruth* primary) 
+  bool G4Helper::G4Run(const simb::MCTruth* primary)
   {
     // Get the event converter ready.
     fConvertMCTruth->Reset();
 
     // Pass the MCTruth to our event generator.
     fConvertMCTruth->Append( primary );
-    
+
     // Start the simulation for this event.  Note: The following
     // statement increments the G4RunManager's run number.  Because of
     // this, it's important for events to use the run/event number
@@ -500,7 +474,7 @@ namespace g4b{
   }
 
   //------------------------------------------------
-  bool G4Helper::G4Run(std::vector<const simb::MCTruth*> &primaries) 
+  bool G4Helper::G4Run(std::vector<const simb::MCTruth*> &primaries)
   {
     // Get the event converter ready.
     fConvertMCTruth->Reset();
@@ -508,7 +482,7 @@ namespace g4b{
     // Pass all the MCTruths to our event generator.
     for(auto primary : primaries)
       fConvertMCTruth->Append( primary );
-    
+
     // Start the simulation for this event.  Note: The following
     // statement increments the G4RunManager's run number.  Because of
     // this, it's important for events to use the run/event number
