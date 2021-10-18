@@ -29,19 +29,17 @@ cet_set_compiler_flags(DIAGS CAUTIOUS WERROR
                                        -Wno-unused-local-typedefs -Wno-variadic-macros)
 cet_report_compiler_flags(REPORT_THRESHOLD VERBOSE)
 
-# these are minimum required versions, not the actual product versions
-find_ups_product( art ) ### MIGRATE-ACTION-RECOMMENDED: use cet_find_package() with target semantics for linking
-find_ups_product(art_root_io) ### MIGRATE-ACTION-RECOMMENDED: use cet_find_package() with target semantics for linking
-find_ups_product(canvas_root_io) ### MIGRATE-ACTION-RECOMMENDED: use cet_find_package() with target semantics for linking
-find_ups_product( nusimdata ) ### MIGRATE-ACTION-RECOMMENDED: use cet_find_package() with target semantics for linking
-find_ups_product( clhep ) ### MIGRATE-ACTION-RECOMMENDED: use cet_find_package() with target semantics for linking
-find_ups_product( cetlib ) ### MIGRATE-ACTION-RECOMMENDED: use cet_find_package() with target semantics for linking
-find_ups_product( cetlib_except ) ### MIGRATE-ACTION-RECOMMENDED: use cet_find_package() with target semantics for linking
-find_ups_product( pythia8 ) ### MIGRATE-ACTION-RECOMMENDED: use cet_find_package() with target semantics for linking
-find_ups_geant4( )
-find_ups_root()
-
-message(STATUS "ROOTSYS is ${ROOTSYS}")
+find_package(art REQUIRED)
+find_package(art_root_io REQUIRED)
+find_package(canvas_root_io REQUIRED)
+find_package(nusimdata REQUIRED)
+find_package(cetlib REQUIRED)
+find_package(cetlib_except REQUIRED)
+find_package(CLHEP REQUIRED)
+find_package(Boost REQUIRED)
+find_package(Pythia8 REQUIRED)
+find_package(Geant4 REQUIRED)
+find_package(ROOT COMPONENTS Core REQUIRED PUBLIC)
 
 # macros
 include(ArtMake)
