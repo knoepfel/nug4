@@ -1,7 +1,7 @@
 
 art_make( LIB_LIBRARIES nusimdata::SimulationBase ### MIGRATE-ACTION-RECOMMENDED: use art_make_library(), art_dictionary(), simple_plugin() with explicit source lists
-                        nug4_MagneticFieldServices_MagneticFieldServiceStandard_service
-                        nug4_MagneticField
+                        nug4::MagneticFieldServices_MagneticFieldServiceStandard_service
+                        nug4::MagneticField
 			                  canvas::canvas
                         ART_FRAMEWORK_SERVICES_REGISTRY
                         MF_MESSAGELOGGER
@@ -29,7 +29,7 @@ art_make( LIB_LIBRARIES nusimdata::SimulationBase ### MIGRATE-ACTION-RECOMMENDED
                         G4VISHEPREP
                         G4VIS_MANAGEMENT
                         XERCESC
-                        CLHEP
+                        CLHEP::CLHEP
                         )
 
 install_headers()

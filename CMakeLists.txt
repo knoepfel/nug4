@@ -24,9 +24,9 @@ cet_cmake_env()
 # -D_GLIBCXX_USE_NANOSLEEP is needed to make std::this_thread::sleep_for available. (IFDatabase)
 cet_set_compiler_flags(DIAGS CAUTIOUS WERROR
                        NO_UNDEFINED
-                       EXTRA_FLAGS -pedantic
-                       EXTRA_CXX_FLAGS -D_GLIBCXX_USE_NANOSLEEP
-                                       -Wno-unused-local-typedefs -Wno-variadic-macros)
+                       EXTRA_FLAGS -pedantic 
+                                   $<$<COMPILE_LANGUAGE:CXX>:-D_GLIBCXX_USE_NANOSLEEP 
+                                   -Wno-unused-local-typedefs -Wno-variadic-macros>)
 cet_report_compiler_flags(REPORT_THRESHOLD VERBOSE)
 
 find_package(art REQUIRED)
@@ -37,7 +37,6 @@ find_package(cetlib REQUIRED)
 find_package(cetlib_except REQUIRED)
 find_package(CLHEP REQUIRED)
 find_package(Boost REQUIRED)
-find_package(Pythia8 REQUIRED)
 find_package(Geant4 REQUIRED)
 find_package(ROOT COMPONENTS Core REQUIRED PUBLIC)
 
@@ -45,6 +44,10 @@ find_package(ROOT COMPONENTS Core REQUIRED PUBLIC)
 include(ArtMake)
 include(BuildPlugins)
 include(CetRootCint)
+
+# headers
+### MIGRATE-ACTION-RECOMMENDED: using UPS environmental variables here
+include_directories($ENV{G4INCLUDE})
 
 # source
 add_subdirectory (nug4)
