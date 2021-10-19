@@ -1,4 +1,3 @@
-##include_directories( ${CMAKE_CURRENT_SOURCE_DIR} ) ### MIGRATE-ACTION-RECOMMENDED: use target_link_directories() with target semantics
 
 cet_build_plugin( MagneticFieldServiceStandard art::service
       LIBRARIES
