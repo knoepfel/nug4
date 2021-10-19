@@ -17,11 +17,11 @@ art_make( LIB_LIBRARIES nusimdata::SimulationBase ### MIGRATE-ACTION-RECOMMENDED
                         Geant4::G4geometry
                         Geant4::G4global
                         Geant4::G4intercoms
-                        Geant4::G4materials.so
-                        Geant4::G4modeling.so
-                        Geant4::G4particles.so
-                        Geant4::G4persistency.so
-                        Geant4::G4physicslists.so
+                        Geant4::G4materials
+                        Geant4::G4modeling
+                        Geant4::G4particles
+                        Geant4::G4persistency
+                        Geant4::G4physicslists
                         Geant4::G4processes
                         Geant4::G4readout
                         Geant4::G4run
