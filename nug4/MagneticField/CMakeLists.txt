@@ -12,9 +12,10 @@ art_make_library( SOURCE MagneticFieldStandard.cxx
           CLHEP::CLHEP
           ROOT::Core
           ROOT::Geom
+          ROOT::Physics
           PUBLIC
          )
-         
+
 install_headers()
 install_fhicl()
 install_source()
