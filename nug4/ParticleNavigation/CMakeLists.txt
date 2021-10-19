@@ -1,7 +1,4 @@
 
-# for classes_def.xml!!
-##include_directories( ${CMAKE_CURRENT_SOURCE_DIR} ) ### MIGRATE-ACTION-RECOMMENDED: use target_link_directories() with target semantics
-
 art_make_library( SOURCE EmEveIdCalculator.cxx  EveIdCalculator.cxx
                          ParticleHistory.cxx  ParticleList.cxx
           LIBRARIES nusimdata::SimulationBase

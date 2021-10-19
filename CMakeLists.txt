@@ -38,7 +38,7 @@ find_package(cetlib_except REQUIRED)
 find_package(CLHEP REQUIRED)
 find_package(Boost REQUIRED)
 find_package(Geant4 REQUIRED)
-find_package(ROOT COMPONENTS Core REQUIRED PUBLIC)
+find_package(ROOT COMPONENTS Core Physics Geom REQUIRED PUBLIC)
 
 # macros
 include(ArtMake)
@@ -46,8 +46,8 @@ include(BuildPlugins)
 include(CetRootCint)
 
 # headers
-### MIGRATE-ACTION-RECOMMENDED: using UPS environmental variables here
-include_directories($ENV{G4INCLUDE})
+# allow the use of #include "Geant4/.."
+include_directories("${Geant4_INCLUDE_DIRS}/../")
 
 # source
 add_subdirectory (nug4)

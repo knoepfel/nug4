@@ -1,11 +1,12 @@
 
-art_make( LIB_LIBRARIES nusimdata::SimulationBase ### MIGRATE-ACTION-RECOMMENDED: use art_make_library(), art_dictionary(), simple_plugin() with explicit source lists
+art_make_library( LIBRARIES
                         nug4::MagneticFieldServices_MagneticFieldServiceStandard_service
                         nug4::MagneticField
-			                  canvas::canvas
-                        ART_FRAMEWORK_SERVICES_REGISTRY
-                        MF_MESSAGELOGGER
-                        FHICLCPP
+                        nusimdata::SimulationBase
+                        canvas::canvas
+                        art::Framework_Services_Registry
+                        messagefacility::MF_MessageLogger
+                        fhiclcpp::fhiclcpp
                         cetlib::cetlib
                         cetlib_except::cetlib_except
                         Geant4::G4FR
