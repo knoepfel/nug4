@@ -3,7 +3,7 @@
 #art_make(NO_PLUGINS ### MIGRATE-ACTION-RECOMMENDED: use art_make_library(), art_dictionary(), simple_plugin() with explicit source lists
 art_make_library( SOURCE MagneticFieldStandard.cxx
           LIBRARIES
-          G4GEOMETRY
+          Geant4::G4geometry
           messagefacility::MF_MessageLogger
           canvas::canvas
           fhiclcpp::fhiclcpp

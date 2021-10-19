@@ -5,7 +5,7 @@ cet_build_plugin( MagneticFieldServiceStandard art::service
             messagefacility::MF_MessageLogger
             cetlib_except::cetlib_except
             nug4::MagneticField
-            G4GEOMETRY
+            Geant4::G4geometry
             CLHEP::CLHEP
             ROOT::Core
             ROOT::Geom )

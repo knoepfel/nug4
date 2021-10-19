@@ -7,17 +7,17 @@ include_directories($ENV{PYTHIA8_INC})
 art_make_library(SOURCE Py8CharmDecayerPhysics.cc Py8Decayer.cc
                          Py8TauDecayerPhysics.cc RegisterAddG4PhysicsShorthands.cc
                  LIBRARIES messagefacility::MF_MessageLogger
-                        G4EVENT
-                        G4GEOMETRY
-                        G4GLOBAL
-                        G4INTERCOMS
-                        G4MATERIALS
-                        G4MODELING
-                        G4PARTICLES
-                        G4PHYSICSLISTS
-                        G4PROCESSES
-                        G4RUN
-                        G4TRACKING
+                        Geant4::G4event
+                        Geant4::G4geometry
+                        Geant4::G4global
+                        Geant4::G4intercoms
+                        Geant4::G4materials.so
+                        Geant4::G4modeling.so
+                        Geant4::G4particles.so
+                        Geant4::G4physicslists.so
+                        Geant4::G4processes
+                        Geant4::G4run
+                        Geant4::G4tracking
                         CLHEP::CLHEP
                         PYTHIA8
                         )
