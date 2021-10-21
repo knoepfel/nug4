@@ -1,8 +1,5 @@
 
-### MIGRATE-ACTION-RECOMMENDED: use of ENV ... may be UPS-dependent
-##find_package(Pythia8 REQUIRED)
-find_library( PYTHIA8 NAMES pythia8 PATHS ENV PYTHIA8_LIB NO_DEFAULT_PATH )
-include_directories($ENV{PYTHIA8_INC})
+find_package(Pythia8 REQUIRED)
 
 art_make_library(SOURCE Py8CharmDecayerPhysics.cc Py8Decayer.cc
                          Py8TauDecayerPhysics.cc RegisterAddG4PhysicsShorthands.cc
@@ -19,7 +16,7 @@ art_make_library(SOURCE Py8CharmDecayerPhysics.cc Py8Decayer.cc
                         Geant4::G4run
                         Geant4::G4tracking
                         CLHEP::CLHEP
-                        PYTHIA8
+                        pythia8::pythia8
                         )
 
 install_headers()
