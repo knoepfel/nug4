@@ -16,7 +16,7 @@ art_make_library(SOURCE Py8CharmDecayerPhysics.cc Py8Decayer.cc
                         Geant4::G4run
                         Geant4::G4tracking
                         CLHEP::CLHEP
-                        pythia8::pythia8
+                        Pythia8::pythia8
                         )
 
 install_headers()
