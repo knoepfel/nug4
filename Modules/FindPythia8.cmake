@@ -37,35 +37,27 @@ if (EXISTS "${_cet_Pythia8_include_dir}")
   set(Pythia8_LIBRARY_DIR "${_cet_Pythia8_dir}/lib}")
 endif()
 if (Pythia8_FOUND)
-  set(Pythia8_LIBRARY)
-  find_library(PYTHIA8 NAMES pythia8 PATHS ${Pythia8_LIBRARY_DIR})
+  find_library(Pythia8_LIBRARY NAMES pythia8 PATHS ${Pythia8_LIBRARY_DIR})
   if (NOT TARGET Pythia8::pythia8)
     add_library(Pythia8::pythia8 SHARED IMPORTED)
     set_target_properties(Pythia8::pythia8 PROPERTIES
       INTERFACE_INCLUDE_DIRECTORIES "${Pythia8_INCLUDE_DIRS}"
-      IMPORTED_LOCATION "${PYTHIA8}"
+      IMPORTED_LOCATION "${Pythia8_LIBRARY}"
       )
   endif()
-  if (PYTHIA8)
-    list(APPEND Pythia8_LIBRARY PYTHIA8)
-  endif()
-  find_library(PYTHIA8LHAPDF6 NAMES pythia8lhapdf6 PATHS ${Pythia8_LIBRARY_DIR})
+  find_library(Pythia8Lhapdf6_Library NAMES pythia8lhapdf6 PATHS ${Pythia8_LIBRARY_DIR})
   if (NOT TARGET Pythia8::lhapdf6)
     add_library(Pythia8::lhapdf6 SHARED IMPORTED)
     set_target_properties(Pythia8::lhapdf6 PROPERTIES
       INTERFACE_INCLUDE_DIRECTORIES "${Pythia8_INCLUDE_DIRS}"
-      IMPORTED_LOCATION "${PYTHIA8LHAPDF6}"
+      IMPORTED_LOCATION "${Pythia8Lhapdf6_Library}"
       )
   endif()
-  if (PYTHIA8LHAPDF6)
-    list(APPEND Pythia8_LIBRARY PYTHIA8LHAPDF6)
-  endif()
-
 endif()
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(Pythia8 ${_cet_Pythia8_config_mode}
-  REQUIRED_VARS Pythia8_FOUND PYTHIA8
+  REQUIRED_VARS Pythia8_FOUND
   Pythia8_INCLUDE_DIRS
   Pythia8_LIBRARY)
 
