@@ -45,9 +45,9 @@ if (Pythia8_FOUND)
   foreach (_fug IN LISTS _fug_liblist)
     string(TOUPPER ${_fug} _FUG)
     find_library(${_FUG} NAMES ${_fug} PATHS ${Pythia8_LIBRARY_DIR})
-    if (NOT TARGET pythia8::${_fug})
-      add_library(pythia8::${_fug} SHARED IMPORTED)
-      set_target_properties(pythia8::${_fug} PROPERTIES
+    if (NOT TARGET Pythia8::${_fug})
+      add_library(Pythia8::${_fug} SHARED IMPORTED)
+      set_target_properties(Pythia8::${_fug} PROPERTIES
         INTERFACE_INCLUDE_DIRECTORIES "${Pythia8_INCLUDE_DIRS}"
         IMPORTED_LOCATION "${${_FUG}}"
         )
