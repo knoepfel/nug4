@@ -45,12 +45,12 @@ if (Pythia8_FOUND)
       IMPORTED_LOCATION "${Pythia8_LIBRARY}"
       )
   endif()
-  find_library(Pythia8Lhapdf6_Library NAMES pythia8lhapdf6 PATHS ${Pythia8_LIBRARY_DIR})
+  find_library(Pythia8_Lhapdf6_Library NAMES pythia8lhapdf6 PATHS ${Pythia8_LIBRARY_DIR})
   if (NOT TARGET Pythia8::lhapdf6)
     add_library(Pythia8::lhapdf6 SHARED IMPORTED)
     set_target_properties(Pythia8::lhapdf6 PROPERTIES
       INTERFACE_INCLUDE_DIRECTORIES "${Pythia8_INCLUDE_DIRS}"
-      IMPORTED_LOCATION "${Pythia8Lhapdf6_Library}"
+      IMPORTED_LOCATION "${Pythia8_Lhapdf6_Library}"
       )
   endif()
 endif()
