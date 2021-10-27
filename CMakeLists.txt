@@ -54,6 +54,7 @@ include_directories("${Geant4_INCLUDE_DIRS}/../")
 
 # source
 add_subdirectory (nug4)
+add_subdirectory (Modules)
 
 # ups - table and config files
 
