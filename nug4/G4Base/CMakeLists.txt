@@ -1,5 +1,5 @@
 
-art_make_library( LIBRARIES
+art_make_library( LIBRARIES PRIVATE
                         nug4::MagneticFieldServices_MagneticFieldServiceStandard_service
                         nug4::MagneticField
                         nusimdata::SimulationBase

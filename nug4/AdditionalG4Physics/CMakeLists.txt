@@ -3,7 +3,8 @@ find_package(Pythia8 REQUIRED)
 
 art_make_library(SOURCE Py8CharmDecayerPhysics.cc Py8Decayer.cc
                          Py8TauDecayerPhysics.cc RegisterAddG4PhysicsShorthands.cc
-                 LIBRARIES messagefacility::MF_MessageLogger
+                 LIBRARIES PRIVATE
+                        messagefacility::MF_MessageLogger
                         Geant4::G4event
                         Geant4::G4geometry
                         Geant4::G4global

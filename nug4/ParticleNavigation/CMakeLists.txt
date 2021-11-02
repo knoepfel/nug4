@@ -1,7 +1,8 @@
 
 art_make_library( SOURCE EmEveIdCalculator.cxx  EveIdCalculator.cxx
                          ParticleHistory.cxx  ParticleList.cxx
-          LIBRARIES nusimdata::SimulationBase
+                  LIBRARIES PRIVATE
+                        nusimdata::SimulationBase
                         art::Framework_Core
 			art::Framework_Principal
 			art::Framework_Services_Registry

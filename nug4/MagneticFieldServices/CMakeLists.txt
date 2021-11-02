@@ -1,11 +1,12 @@
 
 cet_build_plugin( MagneticFieldServiceStandard art::service
-      LIBRARIES
+      LIBRARIES PRIVATE
+            nug4::MagneticField
             messagefacility::MF_MessageLogger
             cetlib_except::cetlib_except
-            nug4::MagneticField
             Geant4::G4geometry
             CLHEP::CLHEP
+            PUBLIC
             ROOT::Core
             ROOT::Geom )
 

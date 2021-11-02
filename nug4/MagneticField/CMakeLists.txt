@@ -1,6 +1,6 @@
 
 art_make_library( SOURCE MagneticFieldStandard.cxx
-          LIBRARIES
+          LIBRARIES PRIVATE
           Geant4::G4geometry
           messagefacility::MF_MessageLogger
           canvas::canvas
@@ -8,10 +8,10 @@ art_make_library( SOURCE MagneticFieldStandard.cxx
           cetlib::cetlib
           cetlib_except::cetlib_except
           CLHEP::CLHEP
+          PUBLIC
           ROOT::Core
           ROOT::Geom
           ROOT::Physics
-          PUBLIC
          )
          
 install_headers()
