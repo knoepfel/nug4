@@ -1,23 +1,23 @@
-cet_find_library( PYTHIA8 NAMES pythia8 PATHS ENV PYTHIA8_LIB NO_DEFAULT_PATH )
 
-art_make( NO_PLUGINS
-          LIB_LIBRARIES messagefacility::MF_MessageLogger
-                        # cetlib::cetlib
-                        # cetlib_except::cetlib_except
-                        G4EVENT
-                        G4GEOMETRY
-                        G4GLOBAL
-                        G4INTERCOMS
-                        G4MATERIALS
-                        G4MODELING
-                        G4PARTICLES
-                        G4PHYSICSLISTS
-                        G4PROCESSES
-                        G4RUN
-                        G4TRACKING
-                        # XERCESC
-                        CLHEP
-                        PYTHIA8
+find_package(Pythia8 REQUIRED)
+
+art_make_library(SOURCE Py8CharmDecayerPhysics.cc Py8Decayer.cc
+                         Py8TauDecayerPhysics.cc RegisterAddG4PhysicsShorthands.cc
+                 LIBRARIES PRIVATE
+                        messagefacility::MF_MessageLogger
+                        Geant4::G4event
+                        Geant4::G4geometry
+                        Geant4::G4global
+                        Geant4::G4intercoms
+                        Geant4::G4materials
+                        Geant4::G4modeling
+                        Geant4::G4particles
+                        Geant4::G4physicslists
+                        Geant4::G4processes
+                        Geant4::G4run
+                        Geant4::G4tracking
+                        CLHEP::CLHEP
+                        Pythia8::pythia8
                         )
 
 install_headers()

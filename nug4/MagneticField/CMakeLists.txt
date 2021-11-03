@@ -1,18 +1,17 @@
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
 
-art_make(NO_PLUGINS
-          LIB_LIBRARIES
-          G4GEOMETRY
+art_make_library( SOURCE MagneticFieldStandard.cxx
+          LIBRARIES PRIVATE
+          Geant4::G4geometry
           messagefacility::MF_MessageLogger
-          
           canvas::canvas
           fhiclcpp::fhiclcpp
           cetlib::cetlib
           cetlib_except::cetlib_except
-          CLHEP
-          ${ROOT_BASIC_LIB_LIST}
+          CLHEP::CLHEP
+          PUBLIC
+          ROOT::Core
           ROOT::Geom
-          PUBLIC G4GEOMETRY
+          ROOT::Physics
          )
          
 install_headers()

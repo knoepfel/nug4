@@ -1,9 +1,8 @@
 
-# for classes_def.xml!!
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
-
-art_make( NO_PLUGINS
-          LIB_LIBRARIES nusimdata::SimulationBase
+art_make_library( SOURCE EmEveIdCalculator.cxx  EveIdCalculator.cxx
+                         ParticleHistory.cxx  ParticleList.cxx
+                  LIBRARIES PRIVATE
+                        nusimdata::SimulationBase
                         art::Framework_Core
 			art::Framework_Principal
 			art::Framework_Services_Registry
@@ -12,10 +11,9 @@ art_make( NO_PLUGINS
 			art::Utilities
 			canvas::canvas
 			messagefacility::MF_MessageLogger
-			
         		cetlib::cetlib
 			cetlib_except::cetlib_except
-			${ROOT_BASIC_LIB_LIST}
+                        ROOT::Core
         )
 
 install_headers()
