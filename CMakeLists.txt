@@ -16,13 +16,10 @@ cmake_minimum_required(VERSION 3.19 FATAL_ERROR)
 
 
 find_package(cetmodules 2.29.06 REQUIRED)
-project(nug4 VERSION 1.12.01 LANGUAGES CXX)
+project(nug4 VERSION 1.12.02 LANGUAGES CXX)
 
 include(CetCMakeEnv)
 cet_cmake_env()
-
-# Find our own CMake modules, and tell everyone else where to find them.
-cet_cmake_module_directories(Modules)
 
 # -D_GLIBCXX_USE_NANOSLEEP is needed to make std::this_thread::sleep_for available. (IFDatabase)
 cet_set_compiler_flags(DIAGS CAUTIOUS WERROR
@@ -54,7 +51,6 @@ include_directories("${Geant4_INCLUDE_DIRS}/../")
 
 # source
 add_subdirectory (nug4)
-add_subdirectory (Modules)
 
 # ups - table and config files
 
