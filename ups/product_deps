@@ -253,7 +253,7 @@ art_root_io	v1_08_03	-
 geant4		v4_10_6_p01d	-
 nusimdata	v1_25_02	-
 pythia8		v8_3_05		-
-cetmodules	v2_30_01	-	only_for_build
+cetmodules	v3_16_00	-	only_for_build
 end_product_list
 ####################################
 
