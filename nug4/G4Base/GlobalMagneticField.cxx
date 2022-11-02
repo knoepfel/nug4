@@ -14,6 +14,8 @@
 #include "nug4/G4Base/GlobalMagneticField.h"
 #include "nug4/MagneticFieldServices/MagneticFieldService.h"
 
+#include "art/Framework/Services/Registry/ServiceHandle.h"
+
 // CLHEP includes
 #include "CLHEP/Units/SystemOfUnits.h"
 #include "CLHEP/Vector/ThreeVector.h"
