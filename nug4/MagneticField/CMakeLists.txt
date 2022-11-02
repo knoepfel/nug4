@@ -1,18 +1,17 @@
-
-art_make_library( SOURCE MagneticFieldStandard.cxx
-          LIBRARIES PRIVATE
-          Geant4::G4geometry
-          messagefacility::MF_MessageLogger
-          canvas::canvas
-          fhiclcpp::fhiclcpp
-          cetlib::cetlib
-          cetlib_except::cetlib_except
-          CLHEP::CLHEP
-          PUBLIC
-          ROOT::Core
-          ROOT::Geom
-          ROOT::Physics
-         )
+cet_make_library(INTERFACE SOURCE MagneticField.h
+  LIBRARIES INTERFACE
+  Geant4::G4geometry
+  ROOT::Geom
+  ROOT::Physics
+)
+cet_make_library(LIBRARY_NAME MagneticFieldStandard SOURCE MagneticFieldStandard.cxx
+  LIBRARIES
+  PUBLIC
+  nug4::MagneticField
+  Geant4::G4geometry
+  PRIVATE
+  fhiclcpp::fhiclcpp
+)
          
 install_headers()
 install_fhicl()
