@@ -4,7 +4,8 @@ cet_make_library(INTERFACE SOURCE MagneticField.h
   ROOT::Geom
   ROOT::Physics
 )
-cet_make_library(LIBRARY_NAME MagneticFieldStandard SOURCE MagneticFieldStandard.cxx
+cet_make_library(LIBRARY_NAME MagneticFieldStandard USE_PROJECT_NAME
+  SOURCE MagneticFieldStandard.cxx
   LIBRARIES
   PUBLIC
   nug4::MagneticField
