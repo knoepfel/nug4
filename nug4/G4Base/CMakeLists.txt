@@ -1,6 +1,6 @@
 
 art_make_library( LIBRARIES PRIVATE
-                        nug4::MagneticFieldServices
+                        nug4::MagneticFieldService
                         nug4::MagneticField
                         nusimdata::SimulationBase
                         canvas::canvas
