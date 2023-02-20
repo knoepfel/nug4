@@ -46,7 +46,7 @@ namespace sim {
     ParticleList list;
 
     // Copy each entry in the other ParticleList.
-    for (std::pair<int, simb::MCParticle*> const& partInfo: m_particleList)
+    for (auto const& partInfo: m_particleList)
       list.insert(partInfo.second? new simb::MCParticle(*(partInfo.second)): nullptr);
     
     list.m_archive = m_archive;
