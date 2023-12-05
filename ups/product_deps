@@ -249,11 +249,11 @@ libdir	fq_dir		lib
 #
 ####################################
 product		version		qual	flags		<table_format=2>
-art_root_io	v1_11_03	-
-geant4		v4_10_6_p01f	-
-nusimdata	v1_27_02	-
-pythia8		v8_3_08		-
-cetmodules	v3_20_00	-	only_for_build
+art_root_io	v1_13_01	-
+geant4		v4_10_6_p01g	-
+nusimdata	v1_28_00	-
+pythia8		v8_3_10		-
+cetmodules	v3_22_02	-	only_for_build
 end_product_list
 ####################################
 
@@ -309,10 +309,12 @@ end_product_list
 #
 ####################################
 qualifier	nusimdata	art_root_io	geant4		pythia8
-c14:debug	c14:debug	c14:debug	c14:debug	c14:p3913:debug
-c14:prof	c14:prof	c14:prof	c14:prof	c14:p3913:prof
-e26:debug	e26:debug	e26:debug	e26:debug	e26:p3913:debug
-e26:prof	e26:prof	e26:prof	e26:prof	e26:p3913:prof
+c14:debug	c14:debug	c14:debug	c14:debug	c14:p3915:debug
+c14:prof	c14:prof	c14:prof	c14:prof	c14:p3915:prof
+e26:debug	e26:debug	e26:debug	e26:debug	e26:p3915:debug
+e26:prof	e26:prof	e26:prof	e26:prof	e26:p3915:prof
+e28:debug	e28:debug	e28:debug	e28:debug	e28:p3915:debug
+e28:prof	e28:prof	e28:prof	e28:prof	e28:p3915:prof
 end_qualifier_list
 ####################################
 
