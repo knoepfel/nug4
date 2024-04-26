@@ -1,4 +1,3 @@
-
 art_make_library( LIBRARIES PRIVATE
                         nug4::MagneticFieldService
                         nug4::MagneticField
@@ -9,6 +8,7 @@ art_make_library( LIBRARIES PRIVATE
                         fhiclcpp::fhiclcpp
                         cetlib::cetlib
                         cetlib_except::cetlib_except
+                        Boost::boost
                         Geant4::G4FR
                         Geant4::G4GMocren
                         Geant4::G4RayTracer
